@@ -1,6 +1,8 @@
 <?php
 
-namespace RabbitEvents\Publisher\Commands;
+declare(strict_types=1);
+
+namespace RabbitEvents\Publisher\Console;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
@@ -43,7 +45,7 @@ class ObserverMakeCommand extends GeneratorCommand
      */
     protected function buildClass($name)
     {
-        return $this->replaceModel(parent::buildClass($name), $this->option('model'));
+        return $this->replaceModel(parent::buildClass($name), (string) $this->option('model'));
     }
 
     /**
@@ -63,7 +65,7 @@ class ObserverMakeCommand extends GeneratorCommand
      * @param string $model
      * @return string
      */
-    protected function replaceModel($stub, $model): string
+    protected function replaceModel(string $stub, string $model): string
     {
         $model = str_replace('/', '\\', $model);
 
